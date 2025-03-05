@@ -36,6 +36,7 @@ public class FirstScript : MonoBehaviour
 ```
 ### Output:
 
+![Screenshot 2025-03-05 152214](https://github.com/user-attachments/assets/ef8650e4-9220-4aeb-9d43-17e73b896c05)
 
 
 ### Result:
