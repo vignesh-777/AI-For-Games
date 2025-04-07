@@ -30,38 +30,46 @@ To write a program to simulate the process of Pursue and Evade behavior in Unity
     Evader: Set Speed = 6.
 
 5. Write a script for  Player_movement behavior and save it
+#### PlayerMovement
 ```c#
-// **Player_movement**
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public class Player_movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float speed;
+    Rigidbody rb;
+    [SerializeField] float walkSpeed = 10f;
+    float hInput;
+    float vInput;
+
     void Start()
     {
-        float xdir = Input.GetAxis("horizontal") * speed;
-        float zdir = Input.GetAxis("vertical") * speed;
-        transform.position=new Vector3(xdir,zdir);
+        rb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        hInput = Input.GetAxis("Horizontal");
+        vInput = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(hInput,rb.velocity.y,vInput);
+        rb.velocity = direction.normalized * walkSpeed;
+
     }
+
 }
+
 ```
+#### Evader script
 ```c#
-// **Evader script**
+
+using UnityEngine;
+using UnityEngine.AI;
+
 public class Evader : MonoBehaviour
 {
-    // Start is called before the first frame update
+   // Start is called before the first frame update
     public NavMeshAgent agent;
     public Transform target;
-    public float evadespeed;
+    public float evadeSpeed;
     void Start()
     {
         agent= GetComponent<NavMeshAgent>();
@@ -69,9 +77,9 @@ public class Evader : MonoBehaviour
 
     void evade()
     {
-        Vector3 fleedir = transform.position - target.position;
-        Vector3 evadeposition = transform.position + fleedir.normalized * evadespeed;
-        agent.SetDestination(evadeposition);
+        Vector3 dir = transform.position - target.position;
+        Vector3 evadePosition = transform.position + dir.normalized * evadeSpeed;
+        agent.SetDestination(evadePosition);
 
     }
     // Update is called once per frame
@@ -80,9 +88,10 @@ public class Evader : MonoBehaviour
         evade();          
      }
 }
+
 ```
+#### Pursuer script
 ```c#
-// **Pursuer script**
 public class Pursuer: MonoBehaviour
 {
     // Start is called before the first frame update
@@ -115,7 +124,14 @@ public class Pursuer: MonoBehaviour
 
 ### Output:
 
+#### Player
+![Screenshot 2025-04-07 165039](https://github.com/user-attachments/assets/9253585c-4b48-4e60-8dda-9ab97a63437b)
 
+#### Evader
+![Screenshot 2025-04-07 165051](https://github.com/user-attachments/assets/c0c0be93-e047-4af9-8ad6-140cb77acbc9)
+
+#### Pursuer
+![Screenshot 2025-04-07 165059](https://github.com/user-attachments/assets/17390858-cec7-4f1b-b187-9ab04bcbe478)
 
 
 
