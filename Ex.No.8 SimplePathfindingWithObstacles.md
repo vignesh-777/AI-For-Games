@@ -11,24 +11,26 @@ To write a program to pathfinding using AI navigation
 3. Add Obstacles (Cubes or Walls)
   Go to: GameObject → 3D Object → Cube  Scale it: (3, 3, 1) (for a wall-like structure)
   Position it: Place it anywhere to block AI movement Rename it: "Obstacle"  Duplicate: Ctrl + D to create multiple obstacles ,tag the obstacke with same name.
-4.Bake the NavMesh
+4. Bake the NavMesh
 Go to: Window → AI → Navigation , Select Ground: Click on your Ground object ,
 In Navigation Window: Check ✅ "Navigation Static"  or Add component Navigation surface and Bake
-5.Create the AI Character and Attach navMesh Agent
+5. Create the AI Character and Attach navMesh Agent
 Go to: GameObject → 3D Object → Capsule ,  Rename: "AICharacter" , Scale: (1, 2, 1)
 Go to: Inspector → Add Component → NavMeshAgent Adjust Settings: Speed: 3.5 Stopping Distance: 1  Obstacle Avoidance: High
-6.Create the Script "AIPathFinder" (Go to: Assets → Right Click → Create → C# Script and  Rename it: "AIPathfinder"
-7.Attach the Script"AIPathFinder" code by Drag & Drop the AIPathfinder.cs onto the AICharacter 
-8.Assign the Target:Create a Target: GameObject → 3D Object → Sphere, Rename it: "Target",
+6. Create the Script "AIPathFinder" (Go to: Assets → Right Click → Create → C# Script and  Rename it: "AIPathfinder"
+7. Attach the Script"AIPathFinder" code by Drag & Drop the AIPathfinder.cs onto the AICharacter 
+8. Assign the Target:Create a Target: GameObject → 3D Object → Sphere, Rename it: "Target",
  In AICharacter Inspector → AIPathfinder → Drag the Target Sphere into the "target" field.
-9.Add NavMeshObstacle
+9. Add NavMeshObstacle
 Select an Obstacle (Cube)
 Go to: Inspector → Add Component → NavMeshObstacle and Check: ✅ "Carve"
-10.Move the Obstacle with Code ( attach it with Obstacle) 
+10. Move the Obstacle with Code ( attach it with Obstacle) 
 11. Run the program
 ```  
 ### Program:
-```
+
+```c#
+//AIPathfinder
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +53,9 @@ public class AIPathfinder : MonoBehaviour
         agent.SetDestination(target.position);
     }
 }
-#Moving Obstacle
+```
+```c#
+//Moving Obstacle
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,6 +87,7 @@ transform.position = startPos + new Vector3(movement, 0, 0);
 
 
 
+![Ai-Behavoiur](https://github.com/user-attachments/assets/63a6cc72-8642-477b-b0fe-437bc6f67c7c)
 
 
 
